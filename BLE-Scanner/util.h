@@ -29,7 +29,7 @@
 #include <TimeLib.h>
 #include "wifi.h"
 
-#if DBG
+#ifdef DBG
 /*
 **  debug message
 */

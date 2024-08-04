@@ -179,18 +179,18 @@ void NtpSetup(void)
     /*
        we could resolve the ntp name, so store it in the flash
     */
-#if DBG_NTP
+#ifdef DBG_NTP
     DbgMsg("NTP: lookup of %s successful: %s", _config_ntp.server, IPAddressToString(_ntp_ip).c_str());
 #endif
   }
   else {
-#if DBG_NTP
+#ifdef DBG_NTP
     DbgMsg("NTP: lookup of %s failed", _config_ntp.server);
 #endif
     return;
   }
 
-#if DBG_NTP
+#ifdef DBG_NTP
   DbgMsg("NTP: ip=%s", IPAddressToString(_ntp_ip).c_str());
 #endif
 

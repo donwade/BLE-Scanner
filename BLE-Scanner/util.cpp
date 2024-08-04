@@ -56,7 +56,7 @@ IPAddress BytesToIPAddress(uint8_t *bytes)
 */
 const char *AddressToString(byte *addr, int addrlen, bool dec, char sep)
 {
-#if DBG_UTIL
+#ifdef DBG_UTIL
   DbgMsg("UTIL: entering AddressToString(): addr=%p  addrlen=%d  dec=%d  sep=%c",addr,addrlen,dec,sep);
 #endif
 
@@ -74,7 +74,7 @@ const char *AddressToString(byte *addr, int addrlen, bool dec, char sep)
   }
   str[len - 1] = '\0';
 
-#if DBG_UTIL
+#ifdef DBG_UTIL
   DbgMsg("UTIL: conversion done: len=%d",len);
 #endif
 

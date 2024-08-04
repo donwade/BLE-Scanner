@@ -35,7 +35,7 @@ void EepromInit(const int size)
   _eeprom_size = size;
   EEPROM.begin(_eeprom_size);
 
-#if DBG_EEPROM
+#ifdef DBG_EEPROM
   EepromDump();
 #endif
 }
@@ -49,7 +49,7 @@ void EepromDump(void)
 
   if ((buffer = (byte *) malloc(_eeprom_size))) {
     EepromRead(0, _eeprom_size, buffer);
-#if DBG_EEPROM
+#ifdef DBG_EEPROM
     dump("EEPROM", buffer, _eeprom_size);
 #endif
     free(buffer);
@@ -85,7 +85,7 @@ int EepromRead(const int addr, const int len, void *buffer)
 
   for (n = 0; n < len; n++) {
     ((byte *) buffer)[n] = EEPROM.read(addr + n);
-#if DBG_EEPROM
+#ifdef DBG_EEPROM
     DbgMsg("EEPROM.read: addr[%d] = %u", addr + n, ((byte *) buffer)[n]);
 #endif
   }
@@ -100,12 +100,12 @@ void EepromWrite(const int addr, const int len, const void *buffer)
 {
   for (int n = 0; n < len; n++) {
     EEPROM.write(addr + n, ((byte *) buffer)[n]);
-#if DBG_EEPROM
+#ifdef DBG_EEPROM
     DbgMsg("EEPROM.write: addr[%d] = %u", addr + n, ((byte *) buffer)[n]);
 #endif
   }
   EEPROM.commit();
-#if DBG_EEPROM
+#ifdef DBG_EEPROM
   EepromDump();
 #endif
 }/**/

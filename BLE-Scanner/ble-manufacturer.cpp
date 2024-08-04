@@ -54,7 +54,7 @@ static const BLE_MANUFACTURER _ble_manufacturers[] PROGMEM = {
 */
 void BLEManufacturerSetup(void)
 {
-#if DBG_MAC
+#ifdef DBG_MAC
   DbgMsg("BLEManufacturerSetup: sizeof lookup table entry: %d", sizeof(BLE_MANUFACTURER));
   DbgMsg("BLEManufacturerSetup: sizeof lookup table: %d", sizeof(_ble_manufacturers));
   DbgMsg("BLEManufacturerSetup: length of lookup table: %d", BLE_MANUFACTURER_LIST_LENGTH);
@@ -66,7 +66,7 @@ void BLEManufacturerSetup(void)
 */
 const char *BLEManufacturerLookup(const uint16_t id, const char *none)
 {
-#if DBG_MANUFACTURER
+#ifdef DBG_MANUFACTURER
   DbgMsg("BLEManufacturerLookup: looking up %04x", id);
 #endif
 
@@ -84,7 +84,7 @@ const char *BLEManufacturerLookup(const uint16_t id, const char *none)
     else
       return _ble_manufacturers[mid].name;
   }
-#if DBG_BLE_MANUFACTURER
+#ifdef DBG_BLE_MANUFACTURER
   DbgMsg("BLEManufacturerLookup: nothing found");
 #endif
   return none;

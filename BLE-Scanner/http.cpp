@@ -146,7 +146,7 @@ void HttpSetup(void)
     /*
        handle configuration changes
     */
-#if DBG_HTTP
+#ifdef DBG_HTTP
     for (int n = 0; n < _WebServer.args(); n++ )
       DbgMsg("HTTP: args: %s=%s", _WebServer.argName(n).c_str(), _WebServer.arg(n).c_str());
 #endif

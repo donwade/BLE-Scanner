@@ -38,7 +38,7 @@ static char _AP_SSID[64] = "";
 */
 bool WifiSetup(void)
 {
-#if DBG_WIFI
+#ifdef DBG_WIFI
   DbgMsg("WIFI: setting up wifi");
 #endif
 
@@ -74,7 +74,7 @@ bool WifiSetup(void)
     /*
       connect to the configured Wifi network
     */
-#if DBG_WIFI
+#ifdef DBG_WIFI
     DbgMsg("WIFI: SSID=%s  PSK=%s", _config.wifi.ssid, _config.wifi.psk);
 #endif
 
@@ -110,7 +110,7 @@ bool WifiUpdate(void)
       */
       int timeout = WIFI_CONNECT_TIMEOUT;
 
-#if DBG_WIFI
+#ifdef DBG_WIFI
       DbgMsg("WIFI: status is not connected ... waiting for %d seconds for connection",WIFI_CONNECT_TIMEOUT);
 #endif
       while (WiFi.status() != WL_CONNECTED) {
@@ -139,7 +139,7 @@ bool WifiUpdate(void)
 */
 String WifiGetSSID(void)
 {
-#if DBG_WIFI
+#ifdef DBG_WIFI
   DbgMsg("WIFI: entering WifiGetSSID()");
 #endif
 
@@ -151,7 +151,7 @@ String WifiGetSSID(void)
 */
 int WifiGetChannel(void)
 {
-#if DBG_WIFI
+#ifdef DBG_WIFI
   DbgMsg("WIFI: entering WifiGetChannel()");
 #endif
 
@@ -163,7 +163,7 @@ int WifiGetChannel(void)
 */
 int WifiGetRSSI(void)
 {
-#if DBG_WIFI
+#ifdef DBG_WIFI
   DbgMsg("WIFI: entering WifiGetRSSI()");
 #endif
 
@@ -176,7 +176,7 @@ int WifiGetRSSI(void)
 */
 String WifiGetIpAddr(void)
 {
-#if DBG_WIFI
+#ifdef DBG_WIFI
   DbgMsg("WIFI: entering WifiGetIpAddr()");
 #endif
 
@@ -188,7 +188,7 @@ String WifiGetIpAddr(void)
 */
 String WifiGetMacAddr(void)
 {
-#if DBG_WIFI
+#ifdef DBG_WIFI
   DbgMsg("WIFI: entering WifiGetMacAddr()");
 #endif
 
@@ -201,7 +201,7 @@ String WifiGetMacAddr(void)
 
 WiFiClient *WifiGetClient(void)
 {
-#if DBG_WIFI
+#ifdef DBG_WIFI
   DbgMsg("WIFI: entering WifiGetClient()");
 #endif
 

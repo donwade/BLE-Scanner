@@ -80,7 +80,7 @@ void WatchdogUpdate(void)
     /*
         feed the watchdog
     */
-#if DBG_WATCHDOG || UNIT_TEST
+#ifdef DBG_WATCHDOG || UNIT_TEST
     DbgMsg("WATCHDOG: feeding the watchdog");
 #endif
 

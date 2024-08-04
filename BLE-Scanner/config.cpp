@@ -58,7 +58,7 @@ bool ConfigSetup(void)
     return false;
   }
 
-#if DBG_CFG
+#ifdef DBG_CFG
   dump("CFG:", &_config, sizeof(CONFIG_T));
 #endif
   return true;
@@ -78,13 +78,13 @@ void ConfigUpdate(void)
 */
 void ConfigGet(int offset, int size, void *cfg)
 {
-#if DBG_CFG
+#ifdef DBG_CFG
   DbgMsg("CFG: getting config: offset:%d  size:%d  cfg:%p", offset, size, cfg);
 #endif
 
   memcpy(cfg, (byte *) &_config + offset, size);
 
-#if DBG_CFG
+#ifdef DBG_CFG
   dump("CFG:", cfg, size);
 #endif
 }
@@ -94,13 +94,13 @@ void ConfigGet(int offset, int size, void *cfg)
 */
 void ConfigSet(int offset, int size, void *cfg)
 {
-#if DBG_CFG
+#ifdef DBG_CFG
   DbgMsg("CFG: setting config: offset:%d  size:%d  cfg:%p", offset, size, cfg);
 #endif
 
   memcpy((byte *) &_config + offset, cfg, size);
 
-#if DBG_CFG
+#ifdef DBG_CFG
   dump("CFG:", cfg, size);
 #endif
 

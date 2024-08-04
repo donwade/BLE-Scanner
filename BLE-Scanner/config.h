@@ -37,6 +37,7 @@
 /*
    control the debugging messages
 */
+/*
 #define DBG               0
 #define DBG_BT            (DBG && 1)
 #define DBG_CFG           (DBG && 0)
@@ -49,7 +50,7 @@
 #define DBG_STATE         (DBG && 0)
 #define DBG_UTIL          (DBG && 0)
 #define DBG_WIFI          (DBG && 0)
-
+*/
 
 /*
   tags to mark the configuration in the EEPROM

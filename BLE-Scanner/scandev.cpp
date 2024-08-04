@@ -35,7 +35,7 @@ static int _scandev_count = 0;
 static SCANDEV_T *_scandev_first = NULL;
 static SCANDEV_T *_scandev_last = NULL;
 
-#if DBG_SCANDEV
+#ifdef DBG_SCANDEV
 /*
    dump the bluetoot device list
 */

@@ -39,7 +39,7 @@ class BLEScannerAdvertisedDeviceCallbacks : public NimBLEAdvertisedDeviceCallbac
 {
     void onResult(BLEAdvertisedDevice* advertisedDevice)
     {
-#if DBG_BT
+#ifdef DBG_BT
       DbgMsg("BLE: found advertised device: %s  address type: 0x%02x", advertisedDevice->getAddress().toString().c_str(), advertisedDevice->getAddressType());
       if (advertisedDevice->getAppearance())
         DbgMsg("BLE: found advertised device: %s  appearance: 0x%02x", advertisedDevice->getAddress().toString().c_str(), advertisedDevice->getAppearance());
@@ -96,7 +96,7 @@ void BluetoothSetup(void)
   StateModifyTimeout(STATE_SCANNING, (_config.bluetooth.scan_time + 5) * 1000);
   StateModifyTimeout(STATE_PAUSING, _config.bluetooth.pause_time * 1000);
 
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: init ...");
 #endif
 
@@ -112,7 +112,7 @@ void BluetoothSetup(void)
   /*
      create a scan
   */
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: create a scan ...");
 #endif
   if (!_scan && !(_scan = NimBLEDevice::getScan())) {
@@ -133,7 +133,7 @@ void BluetoothUpdate(void)
 */
 bool BluetoothScanStart(void)
 {
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: BluetoothScanStart");
 #endif
 
@@ -155,7 +155,7 @@ bool BluetoothScanStart(void)
   /*
      start the scan
   */
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: start %s scan for %d seconds ...", (active) ? "active" : "passive", _config.bluetooth.scan_time);
 #endif
   _scan->start(_config.bluetooth.scan_time, false);
@@ -169,7 +169,7 @@ bool BluetoothScanStart(void)
 */
 bool BluetoothScanStop(void)
 {
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: BluetoothScanStop");
 #endif
   _scan->stop();
@@ -193,12 +193,12 @@ class BLEScannerClientCallbacks : public NimBLEClientCallbacks {
 */
 bool BluetoothBatteryCheck(BLEAddress device, uint8_t *battery_level)
 {
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: create a client ...");
 #endif
   NimBLEClient *client = NimBLEDevice::createClient();
 
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: connect device %s ...", device.toString().c_str());
 #endif
   client->setClientCallbacks(new BLEScannerClientCallbacks());
@@ -210,7 +210,7 @@ bool BluetoothBatteryCheck(BLEAddress device, uint8_t *battery_level)
   /*
      select the service
   */
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: create remote service for battery service ...");
 #endif
   NimBLERemoteService *service = client->getService(BLEBatteryService);
@@ -224,7 +224,7 @@ bool BluetoothBatteryCheck(BLEAddress device, uint8_t *battery_level)
   /*
      get the characteristic
   */
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: get characteristics ...");
 #endif
   NimBLERemoteCharacteristic *characteristic = service->getCharacteristic(BLEBatteryCharacteristics);
@@ -235,16 +235,16 @@ bool BluetoothBatteryCheck(BLEAddress device, uint8_t *battery_level)
     return false;
   }
   if (characteristic->canRead() && battery_level) {
-#if DBG_BT
+#ifdef DBG_BT
     DbgMsg("BLE: reading characteristic");
 #endif
     *battery_level = characteristic->readValue<uint8_t>();
-#if DBG_BT
+#ifdef DBG_BT
     DbgMsg("BLE: characteristic value=%u", *battery_level);
 #endif
   }
 
-#if DBG_BT
+#ifdef DBG_BT
   DbgMsg("BLE: disconnecting device");
 #endif
   client->disconnect();

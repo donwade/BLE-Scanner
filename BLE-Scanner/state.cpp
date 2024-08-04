@@ -74,7 +74,7 @@ static STATES _states[] = {
 */
 void StateSetup(int state)
 {
-#if DBG_STATE
+#ifdef DBG_STATE
     DbgMsg("STATE: setting up state to %d",state);
 #endif
   StateChange(state);
@@ -87,7 +87,7 @@ void StateSetup(int state)
 */
 int StateUpdate(void)
 {
-#if DBG_STATE
+#ifdef DBG_STATE
     DbgMsg("STATE: updating state");
 #endif
 
@@ -120,7 +120,7 @@ int StateUpdate(void)
           /*
              start the timer for this state change
           */
-#if DBG_STATE
+#ifdef DBG_STATE
           DbgMsg("STATE: starting timer to change from %d to %d in %lums", _state, _states[n].next, _states[n].timeout);
 #endif
           _state_timer = now + _states[n].timeout;
@@ -137,7 +137,7 @@ int StateUpdate(void)
      the new (and old) state
   */
   if (new_state != STATE_NONE) {
-#if DBG_STATE
+#ifdef DBG_STATE
     DbgMsg("STATE: changing from %d to %d", _state, new_state);
 #endif
     _state_timer = 0;
@@ -151,7 +151,7 @@ int StateUpdate(void)
 */
 void StateChange(int state)
 {
-#if DBG_STATE
+#ifdef DBG_STATE
   DbgMsg("STATE: change requested from %d to %d", _state, state);
 #endif
 
@@ -163,13 +163,13 @@ void StateChange(int state)
 */
 void StateModifyTimeout(int state, unsigned int timeout)
 {
-#if DBG_STATE
+#ifdef DBG_STATE
   DbgMsg("STATE: modifing timeout for state %d: %lums", state, timeout);
 #endif
 
   for (int n = 0; n < sizeof(_states) / sizeof(_states[0]); n++) {
     if (_states[n].state == state) {
-#if DBG_STATE
+#ifdef DBG_STATE
       DbgMsg("STATE: modifing timeout for state %d from %lums to %lums", state, _states[n].timeout, timeout);
 #endif
       _states[n].timeout = timeout;
@@ -185,7 +185,7 @@ void StateModifyTimeout(int state, unsigned int timeout)
 */
 bool StateCheck(int state)
 {
-#if DBG_STATE
+#ifdef DBG_STATE
   DbgMsg("STATE: checking state");
 #endif
 

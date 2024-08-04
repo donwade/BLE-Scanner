@@ -66,7 +66,7 @@ void MqttSetup(void)
   _topic_control = String(_config.mqtt.topicPrefix) + MQTT_TOPIC_CONTROL;
   _topic_device = String(_config.mqtt.topicPrefix) + MQTT_TOPIC_DEVICE;
 
-#if DBG_MQTT
+#ifdef DBG_MQTT
   DbgMsg("MQTT: _topic_announce: %s", _topic_announce.c_str());
   DbgMsg("MQTT: _topic_control: %s", _topic_control.c_str());
   DbgMsg("MQTT: _topic_device: %s", _topic_device.c_str());
@@ -117,7 +117,7 @@ void MqttUpdate(void)
         _last_reconnect = now();
       }
 
-#if DBG_MQTT
+#ifdef DBG_MQTT
       DbgMsg("MQTT: connect_status=%d", connect_status);
 #endif
     }
@@ -135,7 +135,7 @@ void MqttUpdate(void)
       */
       _last_status_update = now();
       _publish_all = true;
-#if DBG_MQTT
+#ifdef DBG_MQTT
       DbgMsg("MQTT: publishing connection state");
 #endif
 
@@ -154,7 +154,7 @@ void MqttUpdate(void)
                     "},"
                     "\"Version\":\"" + GIT_VERSION + "\""
                     "}";
-#if DBG_MQTT
+#ifdef DBG_MQTT
       DbgMsg("MQTT: %s", json.c_str());
 #endif
       _mqtt->publish_P(_topic_announce.c_str(), json.c_str(), true);
@@ -182,7 +182,7 @@ void MqttPublish(String suffix, String msg)
 {
   String topic = _topic_device + String("/") + suffix;
 
-#if DBG_MQTT
+#ifdef DBG_MQTT
   DbgMsg("MQTT: publishing: %s=%s", topic.c_str(), msg.c_str());
 #endif
 
